@@ -1,8 +1,9 @@
-import TextEditor from './components/TextEditor'
+import Wrapper from './components/Editor/Wrapper'
+
 function App() {
   return (
     <div className="App">
-      <TextEditor />
+      <Wrapper />
     </div>
   );
 }

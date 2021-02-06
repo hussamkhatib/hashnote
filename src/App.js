@@ -1,4 +1,4 @@
-import Wrapper from './components/Editor/Wrapper'
+import Wrapper from './components/Wrapper'
 
 function App() {
   return (

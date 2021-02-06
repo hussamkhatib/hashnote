@@ -1,8 +1,10 @@
-import React, { useEffect, useMemo, useState,useCallback } from 'react'
+import React, { useMemo, useState,useCallback } from 'react'
 import { createEditor,Transforms } from 'slate'
 import { Slate, Editable,withReact,ReactEditor } from 'slate-react'
 import styled from 'styled-components'
 
+const Wrapper = styled.div`
+`
 const TextAreaTypography = styled.div`
 line-height: 40px;
 width:100%;
@@ -27,7 +29,7 @@ white-space: pre-wrap;
 word-break: break-word;
 overflow-wrap: break-word;`
 
-const TextEditor = () => {
+const TextEditor = (props) => {
   const [textAreaVal,setTextAreaVal] = useState('.')
 
   function handleChange (e) {
@@ -44,14 +46,12 @@ const TextEditor = () => {
         setTextAreaVal('.') :
         setTextAreaVal(cur)  
     }
+  /*  function handleChange3(){
+      value => setValue(props.value)
+    }*/
 
     const editor = useMemo(() => withReact(createEditor()), [])
-    const [value, setValue] = useState([
-      {
-        type: 'paragraph',
-        children: [{ text: 'A line of text in a paragraph.' }],
-      },
-    ])
+  
   
     const renderElement = useCallback(props => {
       switch (props.element.type) {
@@ -61,19 +61,17 @@ const TextEditor = () => {
           return <DefaultElement {...props} />
       }
     }, [])
-  
     return (
-      <>
+      <Wrapper>
       <TextAreaWrapper
         textAreaVal={textAreaVal}>
         <TArea as='textarea' placeholder='Title' onKeyDown={handleChange} onKeyUp={handleChange2}/>
       </TextAreaWrapper>
-      <Slate editor={editor} value={value} onChange={value => setValue(value)}>
+      <Slate editor={editor} value={props.value} onChange={props.handleChange3}>
         <Editable
-     
           renderElement={renderElement}
           onKeyDown={event => {
-            //console.log(editor.children[editor.selection.anchor.path[0]])
+            //oleole.log(editor.children[editor.selection.anchor.path[0]])
       
             if (event.key === '&') {
               event.preventDefault()
@@ -93,7 +91,7 @@ const TextEditor = () => {
           }}
         />
       </Slate>
-      </>
+      </Wrapper>
     )
     }            
 

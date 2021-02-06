@@ -17,13 +17,19 @@ const Wrapper = () => {
           children: [{ text: 'A line of text in a paragraph.' }],
         },
       ])
-    const [notes,setNotes] = useState(Array.from({length: 5}).map(()=> value))
+    const [notes,setNotes] = useState(Array(5).fill(value))
     const [activeNote,setActiveNote] = useState([0,0])  
     
-    const handleChange3 = value => setValue(value)
-    function setActiveIndex (index) {setActiveNote([index,0])}
+    function handleChange3 (value) { 
+        setValue(value)
+        setNotes([notes[activeNote[0]]=value,...notes].slice(1)) 
+    }
+    function setActiveIndex (index) {
+        setActiveNote([index,0])
+        setValue(notes[index])
+    }
 
-return (
+    return (
         <Container>
             <Nav Active={activeNote[0]} setActiveIndex={setActiveIndex}/>
             <TextEditor value={value} handleChange3={handleChange3}/>            

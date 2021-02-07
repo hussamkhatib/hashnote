@@ -55,7 +55,15 @@ const TextEditor = (props) => {
       <Wrapper>
       <TextAreaWrapper
         textAreaVal={props.textAreaVal}>
-        <TArea ref={inputEl} as='textarea' placeholder='Title' onKeyDown={handleChange} onKeyUp={props.handleChange2}/>
+        <TArea 
+          ref={inputEl} 
+          as='textarea' 
+          value={props.textAreaBox} 
+          placeholder='Title' 
+          onKeyDown={handleChange} 
+          onKeyUp={props.handleChange2}
+          onChange={props.handleChange5}
+          />
       </TextAreaWrapper>
       <Slate editor={editor} value={props.value} onChange={props.handleChange3}>
         <Editable

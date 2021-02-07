@@ -11,7 +11,7 @@ const File = ({ Heading,WriteUp,I }) => {
     
     return (
         <>
-            <Title>{Heading[I]}</Title>
+            <Title>{Heading[I] === '' ? "Untitled" : Heading[I]}</Title>
             <Content>{
                 WriteUp[I].map(i=>( 
                        i.children[0].text

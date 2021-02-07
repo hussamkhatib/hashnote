@@ -17,19 +17,18 @@ const Wrapper = () => {
         },
       ];
     const [textAreaVal,setTextAreaVal] = useState('.')
-    const [titleArr,setTitleArr] = useState(Array.from({length: 3}).map(()=>['Untitled','Untitled']))
+    const [titleArr,setTitleArr] = useState(Array.from({length: 3}).map(()=>['','']))
     const [foldersNames,setFolderNames] = useState(['general','school','meeting'])
     const [activeNote,setActiveNote] = useState([0,0])  
     const [value, setValue] = useState(initialValue)
     const [notes,setNotes] = useState(Array.from({length: 3}).map(()=> [value,value]))
-
-    
+    const [textAreaBox,setTextAreaBox] = useState('')  
       
     function handleChange2(e){
         const cur = e.target.value
         if(cur === '' ){
             setTextAreaVal('.') 
-            setTitleArr([titleArr[activeNote[0]][activeNote[1]] ='Untitled',...titleArr].slice(1))
+            setTitleArr([titleArr[activeNote[0]][activeNote[1]] ='',...titleArr].slice(1))
         }else{    
             setTextAreaVal(cur)  
             setTitleArr([titleArr[activeNote[0]][activeNote[1]] = cur,...titleArr].slice(1))
@@ -41,20 +40,25 @@ const Wrapper = () => {
         setValue(value)
         setNotes([notes[activeNote[0]][activeNote[1]]=value,...notes].slice(1)) 
     }
-
+    function handleChange5(e){
+        setTextAreaBox(e.target.value)
+    }
     function setFolderIndex (index) {
         setActiveNote([index,0])
         setValue(notes[index][0])
+        setTextAreaBox(titleArr[index][0])
     }
     function setFileIndex(index){
         setActiveNote([activeNote[0],index])
         setValue(notes[activeNote[0]][index])
+        setTextAreaBox(titleArr[activeNote[0]][index])
     }
     function createNewNote(){
         const len = notes[activeNote[0]].length
         setValue(initialValue)
+        //setTextAreaVal('')
         setNotes([notes[activeNote[0]][len]=initialValue,...notes].slice(1)) 
-        setTitleArr([titleArr[activeNote[0]][len] = 'Untitled',...titleArr].slice(1))
+        setTitleArr([titleArr[activeNote[0]][len] = '',...titleArr].slice(1))
     }
 
     return (
@@ -72,6 +76,8 @@ const Wrapper = () => {
                 FolderLen={foldersNames.length}
             />
             <TextEditor
+                handleChange5={handleChange5}
+                textAreaBox={textAreaBox}
                 textAreaVal={textAreaVal}
                 handleChange2={handleChange2} 
                 value={value}

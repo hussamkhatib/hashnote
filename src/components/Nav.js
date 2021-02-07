@@ -7,8 +7,8 @@ import Folder from './hierarchy/Folder'
 
 const NavBar = styled.nav`
 border-right: 3px solid black;
-height: 100vh;
 display: flex;
+background:#3b3b3b;
 `
 const Flex = styled.div`
 flex: 1;`
@@ -20,12 +20,13 @@ const Nav = ({ FolderActive,FileActive,setFolderIndex,setFileIndex,Heading,Write
             {Array.from({length: 3}).map((item,index) => (
                 <HierarchyWrapper
                     Height = '30px'
-                    padding= '0px'
+                    Padding= '0px'
                     setActiveIndex={setFolderIndex} 
                     Active ={FolderActive}
                     index={index} 
                     key={index}>
                     <Folder 
+                        I={index} 
                         FolderName={FolderName}
                         Folder={true}/>
                 </HierarchyWrapper>        

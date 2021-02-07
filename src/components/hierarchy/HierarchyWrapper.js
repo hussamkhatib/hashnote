@@ -3,19 +3,18 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
         padding: 1em;
-        border: 3px solid orangered;
+        border: 3px solid #232323;
         overflow-wrap: break-word;
+        color: #aca7cb;
         height: ${props => props.Height};
         padding: ${props => props.Padding};    
         ${props => 
             props.Active
             ?  `
-                background: : white;
-                color: dodgerblue;
+                background:#474554;
+             
             `
             : `
-                background: dodgerblue;
-                color: white;
             `
         }
     `;

@@ -12,6 +12,7 @@ grid-template-columns: 40vw 1fr;
 const Wrapper = () => {
     const [textAreaVal,setTextAreaVal] = useState('.')
     const [titleArr,setTitleArr] = useState(Array.from({length:3}).map(()=>['Untitled','Untitled']))
+    const [foldersNames,setFolderNames] = useState(['general','school','meeting'])
 
     function handleChange2(e){
         const cur = e.target.value
@@ -53,7 +54,7 @@ const Wrapper = () => {
                 FileActive={activeNote[1]} 
                 setFolderIndex={setFolderIndex}
                 setFileIndex={setFileIndex}
-                FolderName = 'Folder'
+                FolderName = {foldersNames}
                 Heading= {titleArr[activeNote[0]]}
                 WriteUp = {notes[activeNote[0]]}
             />

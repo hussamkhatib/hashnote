@@ -1,4 +1,4 @@
-import React, { useMemo, useState,useCallback } from 'react'
+import React, { useRef,useMemo, useState,useCallback } from 'react'
 import { createEditor,Transforms } from 'slate'
 import { Slate, Editable,withReact,ReactEditor } from 'slate-react'
 import styled from 'styled-components'
@@ -30,7 +30,7 @@ word-break: break-word;
 overflow-wrap: break-word;`
 
 const TextEditor = (props) => {
-
+  const inputEl = useRef(null);
   function handleChange (e) {
     e.key === 'Enter' && ReactEditor.focus(editor);
     
@@ -55,14 +55,13 @@ const TextEditor = (props) => {
       <Wrapper>
       <TextAreaWrapper
         textAreaVal={props.textAreaVal}>
-        <TArea as='textarea' placeholder='Title' onKeyDown={handleChange} onKeyUp={props.handleChange2}/>
+        <TArea ref={inputEl} as='textarea' placeholder='Title' onKeyDown={handleChange} onKeyUp={props.handleChange2}/>
       </TextAreaWrapper>
       <Slate editor={editor} value={props.value} onChange={props.handleChange3}>
         <Editable
           renderElement={renderElement}
           onKeyDown={event => {
-            //oleole.log(editor.children[editor.selection.anchor.path[0]])
-      
+          
             if (event.key === '&') {
               event.preventDefault()
               editor.deleteFragment()
@@ -77,7 +76,10 @@ const TextEditor = (props) => {
             }
           }}
           onKeyUp = {event =>{
-           // let temp = editor.selection.anchor.path[0]
+            let cur = editor.selection.anchor
+            if ((event.key === 'ArrowUp' || event.key === 'ArrowLeft' )&& cur.offset === 0 && cur.path[0] === 0){
+              inputEl.current.focus();
+          }
           }}
         />
       </Slate>

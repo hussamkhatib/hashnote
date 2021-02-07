@@ -4,11 +4,11 @@ import React from 'react'
 //const FolderN = styled.div`
 //`
 
-const Folder = ({ FolderName }) => {
+const Folder = ({ FolderName,I }) => {
 
     return (
         <>
-            {FolderName}
+            {FolderName[I]}
         </>
     )
 }

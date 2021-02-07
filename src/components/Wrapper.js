@@ -10,7 +10,19 @@ grid-template-columns: 40vw 1fr;
 `
 
 const Wrapper = () => {
+    const [textAreaVal,setTextAreaVal] = useState('.')
+    const [titleArr,setTitleArr] = useState(Array.from({length:3}).map(()=>['Untitled','Untitled']))
 
+    function handleChange2(e){
+        const cur = e.target.value
+        if(cur === '' ){
+            setTextAreaVal('.') 
+            setTitleArr([titleArr[activeNote[0]][activeNote[1]] ='Untitled',...titleArr].slice(1))
+        }else{    
+            setTextAreaVal(cur)  
+            setTitleArr([titleArr[activeNote[0]][activeNote[1]] = cur,...titleArr].slice(1))
+        }
+        }
     const [value, setValue] = useState([
         {
           type: 'paragraph',
@@ -19,21 +31,20 @@ const Wrapper = () => {
       ])
     const [notes,setNotes] = useState(Array.from({length:3}).map(()=> [value,value]))
     const [activeNote,setActiveNote] = useState([0,0])  
-
+    
     function handleChange3 (value) { 
         setValue(value)
         setNotes([notes[activeNote[0]][activeNote[1]]=value,...notes].slice(1)) 
     }
 
     function setFolderIndex (index) {
-        setActiveNote([index,activeNote[1]])
-        setValue(notes[index][activeNote[1]])
+        setActiveNote([index,0])
+        setValue(notes[index][0])
     }
     function setFileIndex(index){
         setActiveNote([activeNote[0],index])
         setValue(notes[activeNote[0]][index])
     }
-
 
     return (
         <Container>
@@ -43,11 +54,13 @@ const Wrapper = () => {
                 setFolderIndex={setFolderIndex}
                 setFileIndex={setFileIndex}
                 FolderName = 'Folder'
-                Heading= 'Title'
+                Heading= {titleArr[activeNote[0]]}
                 WriteUp = {notes[activeNote[0]]}
             />
-            <TextEditor 
-                value={value} 
+            <TextEditor
+                textAreaVal={textAreaVal}
+                handleChange2={handleChange2} 
+                value={value}
                 handleChange3={handleChange3}/>            
         </Container>
     )

@@ -30,7 +30,6 @@ word-break: break-word;
 overflow-wrap: break-word;`
 
 const TextEditor = (props) => {
-  const [textAreaVal,setTextAreaVal] = useState('.')
 
   function handleChange (e) {
     e.key === 'Enter' && ReactEditor.focus(editor);
@@ -40,18 +39,9 @@ const TextEditor = (props) => {
       ReactEditor.focus(editor); 
   }
 }
-    function handleChange2(e){
-      const cur = e.target.value
-      cur === '' ? 
-        setTextAreaVal('.') :
-        setTextAreaVal(cur)  
-    }
-  /*  function handleChange3(){
-      value => setValue(props.value)
-    }*/
-
+   
+ 
     const editor = useMemo(() => withReact(createEditor()), [])
-  
   
     const renderElement = useCallback(props => {
       switch (props.element.type) {
@@ -64,8 +54,8 @@ const TextEditor = (props) => {
     return (
       <Wrapper>
       <TextAreaWrapper
-        textAreaVal={textAreaVal}>
-        <TArea as='textarea' placeholder='Title' onKeyDown={handleChange} onKeyUp={handleChange2}/>
+        textAreaVal={props.textAreaVal}>
+        <TArea as='textarea' placeholder='Title' onKeyDown={handleChange} onKeyUp={props.handleChange2}/>
       </TextAreaWrapper>
       <Slate editor={editor} value={props.value} onChange={props.handleChange3}>
         <Editable

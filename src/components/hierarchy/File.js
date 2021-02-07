@@ -10,7 +10,7 @@ hyphens:auto;`
 const File = ({ Heading,WriteUp,I }) => {
     return (
         <>
-            <Title>{Heading}</Title>
+            <Title>{Heading[I]}</Title>
             <Content>{
                 WriteUp[I].map(i=>( 
                        i.children[0].text

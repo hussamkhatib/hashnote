@@ -10,20 +10,29 @@ display: flex;
 const Flex = styled.div`
 flex: 1;`
 
-const Nav = ({ Active,setActiveIndex }) => {
+const Nav = ({ FolderActive,FileActive,setFolderIndex,setFileIndex }) => {
     return (
         <NavBar>
             <Flex>
-            {Array.from({length: 5}).map((item,index) => (
+            {Array.from({length: 3}).map((item,index) => (
                 <Folder
-                    setActiveIndex={setActiveIndex} 
-                    Active ={Active}
+                    setActiveIndex={setFolderIndex} 
+                    Active ={FolderActive}
                     index={index} 
                     key={index}/>
             )
             )}
             </Flex>
-            <Flex />   
+            <Flex >
+            {Array.from({length: 2}).map((item,index) => (
+                <Folder
+                    setActiveIndex={setFileIndex} 
+                    Active ={FileActive}
+                    index={index} 
+                    key={index}/>
+            )
+            )}
+            </Flex>   
         </NavBar>
     )
 }

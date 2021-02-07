@@ -28,20 +28,27 @@ const Wrapper = () => {
     function setFolderIndex (index) {
         setActiveNote([index,activeNote[1]])
         setValue(notes[index][activeNote[1]])
-        console.log(notes)
     }
     function setFileIndex(index){
         setActiveNote([activeNote[0],index])
         setValue(notes[activeNote[0]][index])
-        console.log(notes)
     }
+
 
     return (
         <Container>
-            <Nav FolderActive={activeNote[0]} FileActive={activeNote[1]} 
-            setFolderIndex={setFolderIndex}
-            setFileIndex={setFileIndex}/>
-            <TextEditor value={value} handleChange3={handleChange3}/>            
+            <Nav 
+                FolderActive={activeNote[0]} 
+                FileActive={activeNote[1]} 
+                setFolderIndex={setFolderIndex}
+                setFileIndex={setFileIndex}
+                FolderName = 'Folder'
+                Heading= 'Title'
+                WriteUp = {notes[activeNote[0]]}
+            />
+            <TextEditor 
+                value={value} 
+                handleChange3={handleChange3}/>            
         </Container>
     )
 }

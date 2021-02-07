@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import Folder from './Folder'
+
+import HierarchyWrapper from './hierarchy/HierarchyWrapper'
+import File from './hierarchy/File'
+import Folder from './hierarchy/Folder'
 
 const NavBar = styled.nav`
 border-right: 3px solid black;
@@ -10,26 +13,40 @@ display: flex;
 const Flex = styled.div`
 flex: 1;`
 
-const Nav = ({ FolderActive,FileActive,setFolderIndex,setFileIndex }) => {
+const Nav = ({ FolderActive,FileActive,setFolderIndex,setFileIndex,Heading,WriteUp,FolderName }) => {
     return (
         <NavBar>
             <Flex>
             {Array.from({length: 3}).map((item,index) => (
-                <Folder
+                <HierarchyWrapper
+                    Height = '30px'
+                    padding= '0px'
                     setActiveIndex={setFolderIndex} 
                     Active ={FolderActive}
                     index={index} 
-                    key={index}/>
+                    key={index}>
+                    <Folder 
+                        FolderName={FolderName}
+                        Folder={true}/>
+                </HierarchyWrapper>        
             )
             )}
             </Flex>
             <Flex >
             {Array.from({length: 2}).map((item,index) => (
-                <Folder
+                <HierarchyWrapper
+                    Height = '100px'
+                    Padding = '1em'
                     setActiveIndex={setFileIndex} 
                     Active ={FileActive}
                     index={index} 
-                    key={index}/>
+                    key={index}>
+                    <File
+                        I={index} 
+                        Heading={Heading}
+                        WriteUp={WriteUp}
+                    />
+                </HierarchyWrapper>
             )
             )}
             </Flex>   

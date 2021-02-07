@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import HierarchyWrapper from './hierarchy/HierarchyWrapper'
 import File from './hierarchy/File'
 import Folder from './hierarchy/Folder'
+import NewNote from './hierarchy/NewNote'
 
 const NavBar = styled.nav`
 border-right: 3px solid black;
@@ -13,11 +14,20 @@ background:#3b3b3b;
 const Flex = styled.div`
 flex: 1;`
 
-const Nav = ({ FolderActive,FileActive,setFolderIndex,setFileIndex,Heading,WriteUp,FolderName }) => {
+const Nav = ({ FolderActive
+            ,FileActive
+            ,setFolderIndex
+            ,setFileIndex
+            ,Heading
+            ,WriteUp
+            ,FolderName
+            ,createNewNote
+            ,FolderLen
+            ,FileLen }) => {
     return (
         <NavBar>
             <Flex>
-            {Array.from({length: 3}).map((item,index) => (
+            {Array.from({length: FolderLen}).map((item,index) => (
                 <HierarchyWrapper
                     Height = '30px'
                     Padding= '0px'
@@ -34,7 +44,9 @@ const Nav = ({ FolderActive,FileActive,setFolderIndex,setFileIndex,Heading,Write
             )}
             </Flex>
             <Flex >
-            {Array.from({length: 2}).map((item,index) => (
+                <NewNote 
+                    createNewNote={createNewNote}/>
+            {Array.from({length: FileLen}).map((item,index) => (
                 <HierarchyWrapper
                     Height = '100px'
                     Padding = '1em'

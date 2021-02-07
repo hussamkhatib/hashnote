@@ -1,4 +1,4 @@
-import React, { useRef,useMemo, useState,useCallback } from 'react'
+import React, { useRef,useMemo,useCallback } from 'react'
 import { createEditor,Transforms } from 'slate'
 import { Slate, Editable,withReact,ReactEditor } from 'slate-react'
 import styled from 'styled-components'
@@ -68,7 +68,6 @@ const TextEditor = (props) => {
             }
             if (event.key === '`' && event.ctrlKey) {
               event.preventDefault()
-              
               Transforms.delete(
                 editor,
                 {reverse: true , distance : 4}

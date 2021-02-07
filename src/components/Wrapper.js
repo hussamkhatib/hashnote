@@ -10,10 +10,21 @@ grid-template-columns: 40vw 1fr;
 `
 
 const Wrapper = () => {
+    const initialValue = [
+        {
+          type: 'paragraph',
+          children: [{ text: 'A line of text in a paragraph.' }],
+        },
+      ];
     const [textAreaVal,setTextAreaVal] = useState('.')
-    const [titleArr,setTitleArr] = useState(Array.from({length:3}).map(()=>['Untitled','Untitled']))
+    const [titleArr,setTitleArr] = useState(Array.from({length: 3}).map(()=>['Untitled','Untitled']))
     const [foldersNames,setFolderNames] = useState(['general','school','meeting'])
+    const [activeNote,setActiveNote] = useState([0,0])  
+    const [value, setValue] = useState(initialValue)
+    const [notes,setNotes] = useState(Array.from({length: 3}).map(()=> [value,value]))
 
+    
+      
     function handleChange2(e){
         const cur = e.target.value
         if(cur === '' ){
@@ -22,17 +33,10 @@ const Wrapper = () => {
         }else{    
             setTextAreaVal(cur)  
             setTitleArr([titleArr[activeNote[0]][activeNote[1]] = cur,...titleArr].slice(1))
+            setFolderNames(['general','school','meeting'])
         }
         }
-    const [value, setValue] = useState([
-        {
-          type: 'paragraph',
-          children: [{ text: 'A line of text in a paragraph.' }],
-        },
-      ])
-    const [notes,setNotes] = useState(Array.from({length:3}).map(()=> [value,value]))
-    const [activeNote,setActiveNote] = useState([0,0])  
-    
+  
     function handleChange3 (value) { 
         setValue(value)
         setNotes([notes[activeNote[0]][activeNote[1]]=value,...notes].slice(1)) 
@@ -46,6 +50,12 @@ const Wrapper = () => {
         setActiveNote([activeNote[0],index])
         setValue(notes[activeNote[0]][index])
     }
+    function createNewNote(){
+        const len = notes[activeNote[0]].length
+        setValue(initialValue)
+        setNotes([notes[activeNote[0]][len]=initialValue,...notes].slice(1)) 
+        setTitleArr([titleArr[activeNote[0]][len] = 'Untitled',...titleArr].slice(1))
+    }
 
     return (
         <Container>
@@ -56,7 +66,10 @@ const Wrapper = () => {
                 setFileIndex={setFileIndex}
                 FolderName = {foldersNames}
                 Heading= {titleArr[activeNote[0]]}
+                FileLen={notes[activeNote[0]].length}
                 WriteUp = {notes[activeNote[0]]}
+                createNewNote={createNewNote}
+                FolderLen={foldersNames.length}
             />
             <TextEditor
                 textAreaVal={textAreaVal}

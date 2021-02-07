@@ -8,6 +8,7 @@ font-size:.8em;
 hyphens:auto;`
 
 const File = ({ Heading,WriteUp,I }) => {
+    
     return (
         <>
             <Title>{Heading[I]}</Title>
